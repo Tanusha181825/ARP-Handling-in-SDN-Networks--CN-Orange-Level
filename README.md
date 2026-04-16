@@ -5,12 +5,14 @@
 
 ## Project Overview
 
-In a traditional network, when one host wants to communicate with another, it first needs to know the MAC address of the destination IP. This is done using **ARP (Address Resolution Protocol)**.
+This project demonstrates how **ARP (Address Resolution Protocol)** can be handled using an **SDN controller** in a **star topology network**.
 
-Normally, ARP requests are broadcasted to all devices in the network, which can lead to unnecessary traffic.
+In a traditional network, ARP requests are broadcast to all devices to find the MAC address of the destination host. In this project, the **Ryu controller intercepts ARP requests**, learns the host information dynamically, and sends replies whenever possible.
 
-In this project, I have implemented **ARP request and reply handling using an SDN controller**.  
-Instead of flooding ARP packets across the network, the controller intercepts ARP requests, processes them, and sends the required ARP reply.
+The network is built using **Mininet**, where all four hosts are connected to a single central switch, forming a **star topology**.
+
+The main objective of this project is to understand how **Software Defined Networking (SDN)** enables centralized control of packet handling and dynamic flow rule installation.
+
 
 This project is implemented using:
 
@@ -35,9 +37,8 @@ The main objectives of this project are:
 
 ## Topology Used
 
-For simplicity, I used a **2-host 1-switch topology**.
-
-```text
-h1 -------- s1 -------- h2
-               |
-         SDN Controller
+              Controller
+                   |
+                  s1
+          /        |        |        \
+        h1        h2       h3       h4
